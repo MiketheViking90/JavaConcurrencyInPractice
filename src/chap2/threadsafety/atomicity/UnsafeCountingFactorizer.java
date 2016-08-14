@@ -1,13 +1,24 @@
-package chap2.threadsafety.servlet;
+package chap2.threadsafety.atomicity;
 
 import java.math.BigInteger;
 
-public class StatelessFactorizer implements Servlet {
+import annotations.NotThreadSafe;
+import chap2.threadsafety.servlet.Servlet;
+import chap2.threadsafety.servlet.ServletRequest;
+import chap2.threadsafety.servlet.ServletResponse;
+import lombok.Getter;
+
+@NotThreadSafe
+public class UnsafeCountingFactorizer implements Servlet {
+
+    @Getter
+    private long count = 0;
 
     @Override
     public void service(ServletRequest request, ServletResponse response) {
-        BigInteger i = extractFromRequest(request);
+        BigInteger i  = extractFromRequest(request);
         BigInteger[] factors = factor(i);
+        ++count;
         encodeIntoResponse(response, factors);
     }
 
