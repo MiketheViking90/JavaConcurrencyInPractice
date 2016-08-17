@@ -1,4 +1,4 @@
-package chap2.locking;
+package chap2.locking.intrinsiclock;
 
 import java.math.BigInteger;
 import java.util.concurrent.atomic.AtomicReference;
